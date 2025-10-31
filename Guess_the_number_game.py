@@ -3,7 +3,7 @@
 
 import random
 '''
-update:
+update guess_the_number_game beta 0.2:
 added an option for user to select a difficulty 
 easy - shows hints
 normal - basic game as it was - vanilla
