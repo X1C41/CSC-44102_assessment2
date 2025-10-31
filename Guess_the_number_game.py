@@ -2,8 +2,7 @@
 
 import random
 '''
-asks user to input numbers until the correct one is found
-subtle clues are given per guess
+make a replay (play again) function to allow players to play again or exit
 '''
 def guess_the_number():
     print("Welcome to 'Guess the Number'!")
