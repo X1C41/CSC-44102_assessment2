@@ -1,11 +1,22 @@
 '''
-update guess the number game beta 0.2a
+update guess the number game: beta 0.2a from beta 0.2
 added gui to guess the number beta 0.2
+update guess the number game: beta 0.2a-1 from beta 0.2a
+simplified hints into a function  
 '''
 
 import tkinter as tk
 from tkinter import messagebox
 import random
+
+def give_hint(diff):
+        if diff <= 5:
+           hint = "Hint: Really Warm, range within 5 numbers"
+        elif diff >= 10:
+            hint = "Hint: Cold, range over 10 numbers"
+        else:
+            hint = "Hint: A Bit Warm, range within 10 numbers"
+        return hint
 
 class GuessTheNumberGUI:
     def __init__(self, root):
@@ -42,6 +53,9 @@ class GuessTheNumberGUI:
         self.feedback = tk.Label(self.root, text="")
         self.feedback.pack(pady=10)
 
+    
+
+
     def check_guess(self):
         try:
             guess = int(self.entry.get())
@@ -60,24 +74,12 @@ class GuessTheNumberGUI:
                 hint = ""
                 if self.difficulty == 1:
                     diff = self.number_to_guess - guess
-                    if diff <= 5:
-                        hint = "Hint: Really Warm, range within 5 numbers"
-                    elif diff >= 10:
-                        hint = "Hint: Cold, range over 10 numbers"
-                    else:
-                        hint = "Hint: A Bit Warm, range within 10 numbers"
-                self.feedback.config(text=f"{hint}\nToo low! Try again.")
+                self.feedback.config(text=f"{give_hint(diff):}\nToo low! Try again.")
             elif guess > self.number_to_guess:
                 hint = ""
                 if self.difficulty == 1:
                     diff = guess - self.number_to_guess
-                    if diff <= 5:
-                        hint = "Hint: Really Warm"
-                    elif diff >= 10:
-                        hint = "Hint: A Bit Cold"
-                    else:
-                        hint = "Hint: A Bit Warm"
-                self.feedback.config(text=f"{hint}\nToo high! Try again.")
+                self.feedback.config(text=f"{give_hint(diff):}\nToo high! Try again.")
             else:
                 messagebox.showinfo("Congratulations!", f"You guessed the number in {self.attempts} attempts!")
                 self.setup_difficulty_screen()
@@ -87,6 +89,8 @@ class GuessTheNumberGUI:
     def clear_screen(self):
         for widget in self.root.winfo_children():
             widget.destroy()
+
+
 
 if __name__ == "__main__":
     root = tk.Tk()
