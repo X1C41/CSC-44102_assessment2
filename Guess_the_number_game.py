@@ -5,6 +5,9 @@
 '''
 Patch Notes:
 
+beta 0.3a from beta 0.3:
+added a replay or quit function
+
 beta 0.3 from beta 0.2a-1:
 GUI integrated into the main code
 
@@ -90,15 +93,17 @@ class GuessTheNumberGUI:
                 return
 
             if guess < self.number_to_guess:
-                hint = ""
+                hint = "" 
                 if self.difficulty == 1:
                     diff = self.number_to_guess - guess
-                self.feedback.config(text=f"{give_hint(diff):}\nToo low! Try again.")
+                    hint = give_hint(diff)
+                self.feedback.config(text=f"{hint}\nToo low! Try again.")
             elif guess > self.number_to_guess:
                 hint = ""
                 if self.difficulty == 1:
                     diff = guess - self.number_to_guess
-                self.feedback.config(text=f"{give_hint(diff):}\nToo high! Try again.")
+                    hint = give_hint(diff)
+                self.feedback.config(text=f"{hint}\nToo high! Try again.")
             else:
                 messagebox.showinfo("Congratulations!", f"You guessed the number in {self.attempts} attempts!")
                 self.setup_difficulty_screen()
