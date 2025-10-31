@@ -1,3 +1,8 @@
+'''
+update guess the number game beta 0.2a
+added gui to guess the number beta 0.2
+'''
+
 import tkinter as tk
 from tkinter import messagebox
 import random
@@ -56,11 +61,11 @@ class GuessTheNumberGUI:
                 if self.difficulty == 1:
                     diff = self.number_to_guess - guess
                     if diff <= 5:
-                        hint = "Hint: Really Warm"
+                        hint = "Hint: Really Warm, range within 5 numbers"
                     elif diff >= 10:
-                        hint = "Hint: A Bit Cold"
+                        hint = "Hint: Cold, range over 10 numbers"
                     else:
-                        hint = "Hint: A Bit Warm"
+                        hint = "Hint: A Bit Warm, range within 10 numbers"
                 self.feedback.config(text=f"{hint}\nToo low! Try again.")
             elif guess > self.number_to_guess:
                 hint = ""
