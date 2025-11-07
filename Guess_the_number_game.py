@@ -31,22 +31,13 @@ import tkinter as tk
 from tkinter import messagebox
 import random
 
-'''
-make a replay (play again) function to allow players to play again or exit
-'''
-def guess_the_number():
-    print("Welcome to 'Guess the Number'!")
-    number_to_guess = random.randint(1, 100)
-    attempts = 0
-
 def give_hint(diff):
-        if diff <= 5:
-           hint = "Hint: Really Warm, range within 5 numbers"
-        elif diff >= 10:
-            hint = "Hint: Cold, range over 10 numbers"
-        else:
-            hint = "Hint: A Bit Warm, range within 10 numbers"
-        return hint
+    if diff <= 5:
+        return "Hint: Really Warm, range within 5 numbers"
+    elif diff >= 10:
+        return "Hint: Cold, range over 10 numbers"
+    else:
+        return "Hint: A Bit Warm, range within 10 numbers"
 
 class GuessTheNumberGUI:
     def __init__(self, root):
@@ -83,9 +74,6 @@ class GuessTheNumberGUI:
         self.feedback = tk.Label(self.root, text="")
         self.feedback.pack(pady=10)
 
-    
-
-
     def check_guess(self):
         try:
             guess = int(self.entry.get())
@@ -97,11 +85,11 @@ class GuessTheNumberGUI:
 
             if self.difficulty == 3 and self.attempts >= self.max_attempts:
                 messagebox.showinfo("Game Over", f"Sorry! You've used all {self.max_attempts} attempts.\nThe number was {self.number_to_guess}.")
-                self.setup_difficulty_screen()
+                self.show_end_screen()
                 return
 
             if guess < self.number_to_guess:
-                hint = "" 
+                hint = ""
                 if self.difficulty == 1:
                     diff = self.number_to_guess - guess
                     hint = give_hint(diff)
@@ -114,15 +102,19 @@ class GuessTheNumberGUI:
                 self.feedback.config(text=f"{hint}\nToo high! Try again.")
             else:
                 messagebox.showinfo("Congratulations!", f"You guessed the number in {self.attempts} attempts!")
-                self.setup_difficulty_screen()
+                self.show_end_screen()
         except ValueError:
             self.feedback.config(text="Invalid input. Please enter a number.")
+
+    def show_end_screen(self):
+        self.clear_screen()
+        tk.Label(self.root, text="Would you like to play again?").pack(pady=10)
+        tk.Button(self.root, text="Play Again", command=self.setup_difficulty_screen).pack(pady=5)
+        tk.Button(self.root, text="Quit", command=self.root.quit).pack(pady=5)
 
     def clear_screen(self):
         for widget in self.root.winfo_children():
             widget.destroy()
-
-
 
 if __name__ == "__main__":
     root = tk.Tk()
