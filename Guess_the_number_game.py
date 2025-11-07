@@ -31,6 +31,14 @@ import tkinter as tk
 from tkinter import messagebox
 import random
 
+'''
+make a replay (play again) function to allow players to play again or exit
+'''
+def guess_the_number():
+    print("Welcome to 'Guess the Number'!")
+    number_to_guess = random.randint(1, 100)
+    attempts = 0
+
 def give_hint(diff):
         if diff <= 5:
            hint = "Hint: Really Warm, range within 5 numbers"
